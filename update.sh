@@ -16,7 +16,7 @@ URLBASE="https://vscode-update.azurewebsites.net/latest/linux-${DIST}-x64/stable
 FILENAME="$DIR/latest.${DIST}";
 
 # check latest version 
-wget --spider --output-file=wget.log https://go.microsoft.com/fwlink/?LinkID=760868;
+wget --spider --output-file=wget.log $URLBASE;
 
 if grep -q ${VSCODE_VERSION} wget.log; then
     echo "You already have the latest version - ${VSCODE_VERSION}"
