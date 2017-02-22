@@ -1,6 +1,7 @@
 OS=$(lsb_release -si);
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 DIST="";
+VSCODE_VERSION="$(code -v | head -1)"
 
 if [ "$OS" = "Ubuntu" ] || [ "$OS" = "Debian" ]; then
     DIST="deb";
@@ -14,9 +15,20 @@ fi
 URLBASE="https://vscode-update.azurewebsites.net/latest/linux-${DIST}-x64/stable";
 FILENAME="$DIR/latest.${DIST}";
 
+# check latest version 
+wget --spider --output-file=wget.log https://go.microsoft.com/fwlink/?LinkID=760868;
+
+if grep -q ${VSCODE_VERSION} wget.log; then
+    echo "You already have the latest version - ${VSCODE_VERSION}"
+    exit;
+fi
+
+
 if test -e "$FILENAME"; then
     rm $FILENAME;
     echo "Removed last downloaded version.";
+else
+    echo "{$FILENAME} not exist"
 fi
 
 echo "Downloading latest version of vscode is starting...";
