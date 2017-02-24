@@ -10,6 +10,7 @@
 # TODO:
 # hide code -v information
 # find the better way to check if the vscode was installed or not.
+# example: https://github.com/creationix/nvm/blob/master/nvm.sh#L89
 ##################################################
 # 
 
